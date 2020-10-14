@@ -1,0 +1,8 @@
+.sidebar h6{
+    margin:20px 0px ;
+    border-left: 4px solid orange;
+    padding-left:5px;
+}
+.sidebar a {
+    text-decoration: none;
+}

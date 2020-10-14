@@ -1,0 +1,18 @@
+.SignIn-Header img {
+    text-align: center;
+    width: 280px;
+    margin: 0 auto 50px;
+
+}
+.SignIn-wrapper{
+    background-color: hsla(0,0%,86.7%,.87);
+}
+.SignIn-body {
+    background-color: white;
+    width: 75%;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+.SignIn-body img {
+    width: 50px;
+}

@@ -1,0 +1,41 @@
+.review{
+    text-transform: capitalize;
+}
+.review-wrapper  h2{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 36px;
+line-height: 54px;
+}
+.review-wrapper span {
+    color:  #7AB259;
+}
+.client-img img{
+    width: 64px;
+    height: 64px;
+   margin: 15px;
+}
+.client-img h4{
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 30px;
+margin:0px;
+}
+.client-img h6{
+margin:0px;
+
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+}
+.review-text p{
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 28px;
+color: #707070;
+}

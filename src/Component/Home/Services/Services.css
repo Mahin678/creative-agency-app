@@ -1,0 +1,65 @@
+.services a {
+    text-decoration: none;
+}
+.services h2{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 43px;
+}
+.card-service-custom {
+    height: 19rem;
+    transition:.3s;
+    border-radius: 25px;
+  }
+  .card-service-custom img{
+  }
+
+.card-service-custom:hover {
+    -webkit-transform: translatey(-5px);
+    transition:.3s;
+    transform: translatey(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.195)
+}
+.services h2 span{
+    color: #7AB259;
+}
+
+.services  .card-body img {
+    border:7px solid white;
+    border-radius:50px;
+    width: 74px;
+height: 74px;
+transition:.3s;
+margin:10px;
+}
+.card-body:hover img{
+    transition:.3s;
+  border:7px solid orange;
+}
+.services .card-service-custom  h4{
+    padding:10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.396px;
+    color: grey;
+}
+.services .card-service-custom p {
+    padding:10px;
+    justify-content: center;
+font-family: Poppins;
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 28px;
+
+text-align: center;
+letter-spacing: 0.396px;
+color: darkgrey;
+/* color: rgba(0, 0, 0, 0.7); */
+}

@@ -1,0 +1,25 @@
+.header-content h1{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 60px;
+    letter-spacing: 0.01em;
+    color: #111430;
+}
+.header-content p {
+    max-width: 400px;
+    font-family:Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.005em;
+}
+
+.content-img img{
+    height: 422.79998779296875px;
+width: 624.5999755859375px;
+
+
+}

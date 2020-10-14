@@ -1,0 +1,35 @@
+.dashboard{
+    height: 100vh;
+    text-transform: capitalize;
+}
+.dashboard a {
+    color: black;
+}
+.dashboard label {
+    color: grey;
+}
+.main-title{
+    border-left: 4px solid orange;
+    padding-left:15px;
+    text-transform: uppercase;
+}
+.name-title {
+    border-right: 4px solid orange;
+    padding-right:15px;
+}
+.dashboard-body{
+    background-color: #F4F7FC;
+    height: 100vh;
+    padding: 30px;
+}
+.dashboard-body-wrapper {
+    background-color: white;
+    border-radius: 15px;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
