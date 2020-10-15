@@ -12,9 +12,9 @@ const Brand = () => {
         height: " 44px",
     }
     return (
-        <div className="brand-logo my-5 py-5  mx-auto container"  >
-            <div className="row  mx-auto  text-center ">
-                {brandLogo.map(data => <div className="col-lg-2 mx-auto"><img style={brandStyle} className="img-fluid" src={data.img} alt="img" /></div>
+        <div className="brand-logo my-3 py-3  mx-auto container"  >
+            <div className="row  mx-auto my-3 py-3  text-center ">
+                {brandLogo.map(data => <div className="col-lg-2 my-3 py-3  mx-auto"><img style={brandStyle} className="img-fluid" src={data.img} alt="img" /></div>
                 )}
             </div>
         </div>

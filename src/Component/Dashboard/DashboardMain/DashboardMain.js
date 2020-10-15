@@ -20,12 +20,12 @@ const DashboardMain = (props) => {
         <section className="dashboard container-fluid "  >
             <div className="dashboard-wrapper  " >
                 < div className="row" >
-                    <div className="col-lg-2">
+                    <div className="col-sm-12 col-md-12 col-lg-2">
                         <div className="dashboard-sidebar p-3 " >
                             <Sidebar />
                         </div>
                     </div>
-                    <div className="col-lg-10 pr-0">
+                    <div className="col-sm-12 col-md-12 col-lg-10 pr-0">
                         <div className="dashboard-wrapper  " >
                             <div className="d-flex  justify-content-between p-5"  >
                                 <h4 className="main-title" >{props.title}</h4>

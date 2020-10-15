@@ -23,10 +23,6 @@ export default function PrivateRoute({ children, ...rest }) {
         const currentTime = new Date().getTime() / 1000;
         return decodedToken.exp > currentTime;
     }
-
-
-
-
     return (
         <Route
             {...rest}

@@ -17,8 +17,8 @@ const DashboardServiceList = () => {
                 <div className="dashboard-body"  >
                     <div className="dashboard-body-wrapper p-4" >
                         <div className="dashboard-service-list"  >
-                            <div className="dashboard-service-list-wrapper p-4" >
-                                <table className="table ">
+                            <div style={{ overflow: 'scroll' }} className="dashboard-service-list-wrapper p-4" >
+                                <table className="table " >
                                     <thead><tr><th scope="col">Name</th>
                                         <th scope="col">Email Id</th>
                                         <th scope="col">service</th>

@@ -10,6 +10,7 @@ const SideBard = () => {
     const { user } = useContext(UserContext);
     const [loggedInUser, setLoggedInUser] = user;
     const [users, setUsersInfo] = useState()
+    const [admin, setAdmin] = useState()
 
     const parseJwt = (token) => {
         try {
@@ -28,10 +29,16 @@ const SideBard = () => {
             .then(res => res.json())
             .then(result => {
                 if (result.length == 0) {
-                    setUsersInfo(false)
-                }
-                else {
                     setUsersInfo(true)
+                }
+            })
+    }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/isUser?email=' + email)
+            .then(res => res.json())
+            .then(result => {
+                if (result.length > 0) {
+                    setAdmin(true)
                 }
             })
     }, [])
@@ -42,10 +49,9 @@ const SideBard = () => {
                     <img height="0px" className="img-fluid" src="https://i.imgur.com/SsnK22Z.png" alt="" />
                 </Link>
             </div>
-
             <div className=" p-1 h-75">
-                <div className={`${user == false && "d-none"}`} >
-                    {users && <>  <NavLink activeStyle={{
+                {
+                    admin && <>  <NavLink activeStyle={{
                         fontWeight: "700",
                         color: "darkgrey"
                     }} to="/adminServiceList" >
@@ -62,35 +68,30 @@ const SideBard = () => {
                             color: "darkgrey"
                         }} to="/MakeAdmin" >
                             <h6><FontAwesomeIcon icon={faUserPlus} /> Make admin</h6>
-                        </NavLink> </>}
-
-
-                </div>
-
-                <div className={`${user == true && "d-none"}`} >
-                    {!users && <>
-                        <NavLink activeStyle={{
-                            fontWeight: "700",
-                            color: "darkgrey"
-                        }} to="/order" >
-                            <h6> <FontAwesomeIcon icon={faShoppingCart} />  order</h6>
                         </NavLink>
-                        <NavLink activeStyle={{
-                            fontWeight: "700",
-                            color: "darkgrey"
-                        }} to="/review" >
-                            <h6>  <FontAwesomeIcon icon={faCommentAlt} /> review</h6>
-                        </NavLink>
-                        <NavLink activeStyle={{
-                            fontWeight: "700",
-                            color: "darkgrey"
-                        }} to="/serviceList" >
-                            <h6> <FontAwesomeIcon icon={faServer} /> Service List</h6>
-                        </NavLink></>
-                    }
+                    </>
+                }
 
-                </div>
-
+                {users && <>
+                    <NavLink activeStyle={{
+                        fontWeight: "700",
+                        color: "darkgrey"
+                    }} to="/order" >
+                        <h6> <FontAwesomeIcon icon={faShoppingCart} />  order</h6>
+                    </NavLink>
+                    <NavLink activeStyle={{
+                        fontWeight: "700",
+                        color: "darkgrey"
+                    }} to="/review" >
+                        <h6>  <FontAwesomeIcon icon={faCommentAlt} /> review</h6>
+                    </NavLink>
+                    <NavLink activeStyle={{
+                        fontWeight: "700",
+                        color: "darkgrey"
+                    }} to="/serviceList" >
+                        <h6> <FontAwesomeIcon icon={faServer} /> Service List</h6>
+                    </NavLink></>
+                }
             </div >
 
         </div >

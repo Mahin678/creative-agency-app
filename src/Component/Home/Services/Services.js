@@ -43,8 +43,6 @@ const Services = () => {
             <div className="services-wrapper container text-center" >
                 <h2 className=" py-5  my-5" >Provide awesome <span>services</span></h2>
                 <div className="row " >
-
-
                     {
                         states || !states ?
                             serviceInfo.length ?
@@ -79,9 +77,6 @@ const Services = () => {
 
                             : <p>hello</p>
                     }
-
-
-
                 </div>
             </div>
         </section >

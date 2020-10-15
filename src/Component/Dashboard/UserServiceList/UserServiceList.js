@@ -36,17 +36,10 @@ const UserServiceList = () => {
                 <div className="review  " >
                     <div className="review-wrapper container">
                         <div className="row mx-auto " >
-
                             {
-
                                 service.length ? (service.map(info => <UserServiceData info={info} />)) :
                                     <h1 className="text-danger" >NO Course Found </h1>
                             }
-
-
-
-
-
                         </div>
                     </div>
                 </div>

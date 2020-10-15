@@ -14,7 +14,7 @@ const CarouselSlider = () => {
     const breakPoints = [
         { width: 480, itemsToShow: 1 },
         { width: 768, itemsToShow: 2 },
-        { width: 991, itemsToShow: 2 },
+        { width: 991, itemsToShow: 2.5 },
         { width: 1200, itemsToShow: 2.5 },
     ]
     const imgStyles = {
@@ -24,7 +24,7 @@ const CarouselSlider = () => {
     }
     return (
         <div className="App">
-            <Carousel enableAutoPlay autoPlaySpeed={1500} breakPoints={breakPoints}>
+            <Carousel enableAutoPlay autoPlaySpeed={4000} breakPoints={breakPoints}>
                 {
                     carouselInfo.map(info => <div  >
                         <img style={imgStyles} src={info.img} alt="crsl-img" />

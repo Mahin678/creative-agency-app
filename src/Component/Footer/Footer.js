@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer" >
             <div className="footer-wrapper p-5">
                 <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-sm-12 col-md-12 col-lg-6">
                         <div className="footer-content container p-5" >
                             <h2 >
                                 Let us handle your project
@@ -16,7 +16,7 @@ const Footer = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-sm-12 col-md-12 col-lg-6">
                         <div className="footer-form pt-5">
                             <form>
                                 <div className="form-group ">

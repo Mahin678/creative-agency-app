@@ -67,7 +67,7 @@ const AddService = () => {
                             <div className="addService-wrapper" >
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="row">
-                                        <div className="col-lg-6">
+                                        <div className="col-sm-12 col-md-12 col-lg-6">
                                             <div className="form-group" >
                                                 <label className="font-weight-bold" >Service title</label>
                                                 <input placeholder="Enter Title" className="form-control" name="service" ref={register({ required: true })} />
@@ -77,7 +77,7 @@ const AddService = () => {
                                                 <textarea placeholder="Enter Descriptions" className="form-control" name="descriptions" ref={register({ required: true })} ></textarea>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
+                                        <div className="col-sm-12 col-md-12  col-lg-6">
                                             <div className="form-group">
                                                 <label className="font-weight-bold d-block" >Icon</label>
                                                 <label style={{ backgroundColor: "#DEFFED", color: "#009444", border: "1px solid #009444" }} className="custom-file-upload w-50 p-2 text-center" >

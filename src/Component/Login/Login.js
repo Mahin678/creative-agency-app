@@ -16,6 +16,7 @@ const Login = () => {
     let history = useHistory()
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
+
     const parseJwt = (token) => {
         try {
             return (JSON.parse(atob(token.split('.')[1])))
@@ -23,16 +24,10 @@ const Login = () => {
             return (false);
         }
     };
+
     const data = sessionStorage.getItem('token')
     const loggedUser = parseJwt(data)
     const email = (loggedInUser.email || loggedUser.email)
-
-
-    // useEffect(() => {
-    //     console.log(email)
-
-    // }, [])
-
 
     const provider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSign = () => {
@@ -58,16 +53,12 @@ const Login = () => {
                     }
                 }
                 )
-
         }).catch(function (error) {
             var errorMessage = error.message;
             var credential = error.credential;
         });
 
     }
-
-
-
     const storeAuthToken = () => {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(function (idToken) {
@@ -76,7 +67,6 @@ const Login = () => {
                 // Handle error
             });
     }
-
     return (
         <div className="SignIn-wrapper text-center  p-5">
             <div className="SignIn-Header text-enter  m-auto pt-3">
