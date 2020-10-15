@@ -21,21 +21,20 @@ import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({})
-  console.log(loggedInUser);
   return (
     <UserContext.Provider value={{ user: [loggedInUser, setLoggedInUser] }}>
       <Router>
         <Switch>
           {/* admin panel */}
-          <Route path="/adminServiceList" >
+          <PrivateRoute path="/adminServiceList" >
             <DashboardServiceList />
-          </Route>
-          <Route path="/addService" >
+          </PrivateRoute>
+          <PrivateRoute path="/addService" >
             <AddService />
-          </Route>
-          <Route path="/MakeAdmin" >
+          </PrivateRoute>
+          <PrivateRoute path="/MakeAdmin" >
             <MakeAdmin />
-          </Route>
+          </PrivateRoute>
           {/* user panel */}
           <PrivateRoute path="/order/:id" >
             <Order />

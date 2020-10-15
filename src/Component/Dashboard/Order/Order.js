@@ -20,6 +20,7 @@ const Order = () => {
     const [showService, setShowService] = useState([]);
     const [allService, setAllService] = useState([]);
     const [isValue, setIsValue] = useState(true);
+    const [service, setServiceName] = useState();
     const parseJwt = (token) => {
         try {
             return (JSON.parse(atob(token.split('.')[1])))
@@ -36,20 +37,27 @@ const Order = () => {
     const getService = allService.find(data => data._id == serviceId) || {};
     const data = sessionStorage.getItem('token')
     const loggedUser = parseJwt(data)
-
     const onSubmit = data => {
         let image;
         image = data.file[0];
         if (image == undefined) {
             setIsValue(false)
-            console.log(image);
         }
+        console.log(data);
         const formData = new FormData();
         formData.append('userName', data.name);
         formData.append('email', data.email);
-        formData.append('date', new Date());
+        formData.append('date', new Date().toDateString());
+        if (getService.service) {
+            console.log(data);
+            formData.append('service', data.service);
+            formData.append('serviceName', getService.service);
+        } else {
+            const serviceInfo = JSON.parse(data.service);
+            formData.append('serviceName', serviceInfo.serviceName);
+            formData.append('service', serviceInfo.id);
+        }
         formData.append('description', data.Massage);
-        formData.append('service', data.service);
         formData.append('price', data.price);
         formData.append('image', image);
         fetch('http://localhost:5000/addOrder', {
@@ -100,7 +108,7 @@ const Order = () => {
                                                         <select required className="form-control" defaultChecked={showService[1]} name="service" ref={register({ required: false })} >
                                                             {
                                                                 showService.map(data =>
-                                                                    <option value={data._id} >{data.service}</option>
+                                                                    <option value={JSON.stringify({ id: data._id, serviceName: data.service })} >{data.service}</option>
                                                                 )
                                                             }
                                                         </select> : <Spinner />
@@ -129,7 +137,7 @@ const Order = () => {
                         </div>
                     </div></div >
             </DashboardMain >
-        </div>
+        </div >
     );
 };
 

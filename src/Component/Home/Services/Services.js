@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import Spinner from '../../Spinner/Spinner';
 import './Services.css'
-const servicesInfo = [
-    { id: 1, name: "Web & Mobile design", details: "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.", img: "https://i.imgur.com/Ydax7jf.png" },
-    { id: 2, name: "Graphic design", details: "Amazing flyers, social media posts and brand representations that would make your brand stand out.", img: "https://i.imgur.com/q2RbS9l.png" },
-    { id: 3, name: "Web development", details: "With well written codes, we build amazing apps for all platforms, mobile and web apps in general.", img: "https://i.imgur.com/L015MM8.png" },
-];
 const Services = () => {
-    const [service, setService] = useState([])
+    const [serviceInfo, setServiceInfo] = useState([])
+    const { user } = useContext(UserContext)
+    const [loggedInUser, setLoggedInUser] = user;
+    const [states, setState] = useState(false);
+    const parseJwt = (token) => {
+        try {
+            return (JSON.parse(atob(token.split('.')[1])))
+        } catch (e) {
+            return (false);
+        }
+    };
+    const data = sessionStorage.getItem('token')
+    const loggedUser = parseJwt(data)
+    const email = (loggedInUser.email || loggedUser.email);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/showAllUserOrder?email=' + email)
+            .then(res => res.json())
+            .then(result => {
+                if (result.length == 0) {
+                    setState(false)
+                }
+                else {
+                    setState(true)
+                }
+            })
+    }, [email])
+
     useEffect(() => {
         fetch('http://localhost:5000/showService')
             .then(res => res.json())
-            .then(result => setService(result))
+            .then(result => setServiceInfo(result))
     }, [])
     return (
         <section className="services py-5" >
@@ -23,27 +46,45 @@ const Services = () => {
 
 
                     {
-                        service.length ?
-                            service.map(info =>
-                                <div className="col-sm-12 col-md-6 col-lg-4 mt-4">
-                                    <Link to={`/order/${info._id}`} >
-                                        <div className="card card-service-custom" >
-                                            <div className="card-body ">
-                                                <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
-                                                <h4>{info.service}</h4>
-                                                <p>{info.description}</p>
+                        states || !states ?
+                            serviceInfo.length ?
+                                serviceInfo.map(info =>
+                                    <div className="col-sm-12 col-md-6 col-lg-4 mt-4">
+                                        {
+                                            states && <Link to={`/adminServiceList`} >
+                                                <div className="card card-service-custom" >
+                                                    <div className="card-body ">
+                                                        <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
+                                                        <h4>{info.service}</h4>
+                                                        <p>{info.description}</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        }
+                                        {
+                                            !states && <Link to={`/order/:${info._id}`} >
+                                                <div className="card card-service-custom" >
+                                                    <div className="card-body ">
+                                                        <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
+                                                        <h4>{info.service}</h4>
+                                                        <p>{info.description}</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        }
+                                    </div>
+                                )
 
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            )
-                            : <Spinner />
+                                : <Spinner />
+
+                            : <p>hello</p>
                     }
+
+
 
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
+import Spinner from '../../Spinner/Spinner';
 import DashboardMain from '../DashboardMain/DashboardMain';
 import './DashboardServiceList.css'
 const DashboardServiceList = () => {
+    const [info, setInfo] = useState([])
     useEffect(() => {
-
-    })
+        fetch('http://localhost:5000/showAllOrder')
+            .then(res => res.json())
+            .then(result => setInfo(result))
+    }, [])
     return (
         <div>
 
@@ -18,21 +22,39 @@ const DashboardServiceList = () => {
                                     <thead><tr><th scope="col">Name</th>
                                         <th scope="col">Email Id</th>
                                         <th scope="col">service</th>
-                                        <th scope="col">project details</th>
+                                        <th scope="col">project description</th>
                                         <th scope="col">status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td className="font-weight-bold">Mahin Tazuar Turza</td>
-                                            <td className="text-danger">mahintazuar678@gmail.com</td>
-                                            <td>2020-10-03</td>
-                                            <td className="text-success font-weight-bold">drive Safety</td>
-                                            <td className="delete-button">
-                                                <button className="bg-danger "><img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" /></button></td></tr><tr>
-                                            <td
-                                                className="font-weight-bold">Mahin Tazuar Turza</td><td className="text-danger">mahintazuar678@gmail.com</td><td>2020-10-08</td><td className="text-success font-weight-bold">helps </td><td className="delete-button">
-                                                <button className="bg-danger "><img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" /></button></td></tr><tr><td className="font-weight-bold">Mahin Tazuar Turza</td><td className="text-danger">mahintazuar678@gmail.com</td><td>2020-10-24</td><td className="text-success font-weight-bold">food Charity</td><td className="delete-button"><button className="bg-danger "><img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" /></button></td></tr><tr><td className="font-weight-bold">Mahin Tazuar Turza</td><td className="text-danger">mahintazuar678@gmail.com</td><td>2020-10-15</td><td className="text-success font-weight-bold">animal Shelter</td><td className="delete-button"><button className="bg-danger "><img src="https://i.imgur.com/YwDre2M.png" alt="delete-icon" /></button></td></tr></tbody></table></div>
+
+                                        {
+                                            info.length ? info.map(data => <>
+                                                <tr>
+                                                    <td className="font-weight-bold">{data.userName}</td>
+                                                    <td className="text-danger">{data.userEmail}</td>
+                                                    <td><small>{data.date}</small>  </td>
+                                                    <td className="">
+                                                        <p className="font-weight-bold mb-0" >
+                                                            {data.serviceName}
+                                                        </p>
+                                                        <small className="d-block" >
+                                                            {data.description.substring(0, 40) + '...'}
+                                                        </small>
+                                                    </td>
+                                                    <td className="delete-button">
+                                                        <select className="form-control bg-dark text-light" >
+                                                            <option>Pending</option>
+                                                            <option className="" >Approve</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </>)
+                                                : <h1 className="text-danger" >NO Course Found <small>or wait some moment database working </small> </h1>
+                                        }
+
+
+                                    </tbody></table></div>
                         </div>
                     </div></div>
             </DashboardMain>

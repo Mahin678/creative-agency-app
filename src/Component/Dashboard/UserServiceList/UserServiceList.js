@@ -30,7 +30,6 @@ const UserServiceList = () => {
             .then(res => res.json())
             .then(result => setService(result))
     }, [email])
-    console.log(service);
     return (
         <DashboardMain title={"user service list"} >
             <div className="dashboard-body p-4"  >
@@ -39,8 +38,9 @@ const UserServiceList = () => {
                         <div className="row mx-auto " >
 
                             {
+
                                 service.length ? (service.map(info => <UserServiceData info={info} />)) :
-                                    <h1 className="text-danger" >Data not found </h1>
+                                    <h1 className="text-danger" >NO Course Found </h1>
                             }
 
 

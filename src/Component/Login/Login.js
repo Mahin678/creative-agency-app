@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Login.css'
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from './firebaseConfig';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -15,6 +16,24 @@ const Login = () => {
     let history = useHistory()
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
+    const parseJwt = (token) => {
+        try {
+            return (JSON.parse(atob(token.split('.')[1])))
+        } catch (e) {
+            return (false);
+        }
+    };
+    const data = sessionStorage.getItem('token')
+    const loggedUser = parseJwt(data)
+    const email = (loggedInUser.email || loggedUser.email)
+
+
+    // useEffect(() => {
+    //     console.log(email)
+
+    // }, [])
+
+
     const provider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSign = () => {
         firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -24,23 +43,40 @@ const Login = () => {
             newUser.name = user.displayName;
             newUser.email = user.email;
             newUser.photo = user.photoURL;
-            setLoggedInUser(newUser)
-            storeAuthToken()
+            fetch('http://localhost:5000/isAdmin?email=' + newUser.email)
+                .then(res => res.json())
+                .then(result => {
+                    if (result.length == 0) {
+                        storeAuthToken()
+                        setLoggedInUser(newUser)
+                        history.replace(from)
+                    }
+                    else {
+                        storeAuthToken()
+                        setLoggedInUser(newUser)
+                        history.replace('/adminServiceList')
+                    }
+                }
+                )
+
         }).catch(function (error) {
             var errorMessage = error.message;
             var credential = error.credential;
         });
 
     }
+
+
+
     const storeAuthToken = () => {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(function (idToken) {
                 sessionStorage.setItem('token', idToken);
-                history.replace(from);
             }).catch(function (error) {
                 // Handle error
             });
     }
+
     return (
         <div className="SignIn-wrapper text-center  p-5">
             <div className="SignIn-Header text-enter  m-auto pt-3">
