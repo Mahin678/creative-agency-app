@@ -11,6 +11,9 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../../../App';
 import Spinner from '../../Spinner/Spinner';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+toast.configure();
 const Order = () => {
     const id = useParams();
     const serviceId = id.id;
@@ -29,7 +32,7 @@ const Order = () => {
         }
     };
     useEffect(() => {
-        fetch('http://localhost:5000/showService')
+        fetch('https://infinite-headland-81835.herokuapp.com/showService')
             .then(res => res.json())
             .then(result => setAllService(result))
     }, [])
@@ -60,13 +63,15 @@ const Order = () => {
         formData.append('description', data.Massage);
         formData.append('price', data.price);
         formData.append('image', image);
-        fetch('http://localhost:5000/addOrder', {
+        fetch('https://infinite-headland-81835.herokuapp.com/addOrder', {
             method: 'POST',
             body: formData
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                if (data) {
+                    toast.success('Order purchases successfully')
+                }
             })
             .catch(error => {
                 console.error(error)
@@ -74,7 +79,7 @@ const Order = () => {
 
     };
     useEffect(() => {
-        fetch('http://localhost:5000/showService')
+        fetch('https://infinite-headland-81835.herokuapp.com/showService')
             .then(res => res.json())
             .then(result => setShowService(result))
     }, [])
@@ -119,11 +124,11 @@ const Order = () => {
                                         <textarea required placeholder="Enter Descriptions" className="form-control p-4" name="Massage" ref={register({ required: true })} ></textarea>
                                     </div>
                                     <div className="d-flex" >
-                                        <div className="form-group w-25 mr-4">
+                                        <div className="form-group w-50 mr-4">
                                             <input required placeholder="price" className="form-control p-4" name="price" type="number" ref={register({ required: true })} />
                                         </div>
-                                        <div className="form-group w-75 m-1 ">
-                                            <label style={{ backgroundColor: "#DEFFED", color: "#009444", border: "1px solid #009444" }} className="custom-file-upload w-50 p-2 text-center" >
+                                        <div className="form-group w-50 ">
+                                            <label style={{ backgroundColor: "#DEFFED", color: "#009444", border: "1px solid #009444" }} className="custom-file-upload w-75 p-2 text-center" >
                                                 <input name="file" style={{ display: "none" }} ref={register({ required: false })} type="file" />
                                                 <FontAwesomeIcon icon={faCloudUploadAlt} />
                                                 upload project file

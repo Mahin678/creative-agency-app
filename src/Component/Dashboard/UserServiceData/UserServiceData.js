@@ -6,7 +6,7 @@ import Spinner from '../../Spinner/Spinner';
 const UserServiceData = ({ info }) => {
     const [allService, setAllService] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/showService')
+        fetch('https://infinite-headland-81835.herokuapp.com/showService')
             .then(res => res.json())
             .then(result => setAllService(result))
     }, [])

@@ -25,7 +25,7 @@ const SideBard = () => {
     const email = (loggedInUser.email || loggedUser.email);
 
     useEffect(() => {
-        fetch('http://localhost:5000/isAdmin?email=' + email)
+        fetch('https://infinite-headland-81835.herokuapp.com/isAdmin?email=' + email)
             .then(res => res.json())
             .then(result => {
                 if (result.length == 0) {
@@ -34,7 +34,7 @@ const SideBard = () => {
             })
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/isUser?email=' + email)
+        fetch('https://infinite-headland-81835.herokuapp.com/isUser?email=' + email)
             .then(res => res.json())
             .then(result => {
                 if (result.length > 0) {

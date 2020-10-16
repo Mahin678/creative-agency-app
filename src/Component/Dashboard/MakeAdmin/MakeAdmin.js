@@ -3,18 +3,25 @@ import _ from "lodash/fp";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
 import DashboardMain from '../DashboardMain/DashboardMain';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+toast.configure();
 
 const MakeAdmin = () => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
         console.log(data);
-        fetch('http://localhost:5000/makeAdmin', {
+        fetch('https://infinite-headland-81835.herokuapp.com/makeAdmin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(result => console.log(result))
+            .then(result => {
+                if (result) {
+                    toast.success('Admin successfully added')
+                }
+            })
     };
 
     return (

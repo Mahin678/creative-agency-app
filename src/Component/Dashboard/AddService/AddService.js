@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import { UserContext } from '../../../App';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+toast.configure();
 
 const AddService = () => {
     const { user } = useContext(UserContext)
@@ -42,7 +44,7 @@ const AddService = () => {
         formData.append('description', data.descriptions);
         formData.append('imageFile', image)
 
-        fetch('http://localhost:5000/addService', {
+        fetch('https://infinite-headland-81835.herokuapp.com/addService', {
             method: 'POST',
             body: formData
         })
@@ -50,6 +52,7 @@ const AddService = () => {
             .then(data => {
                 if (data) {
                     setIsValue(true)
+                    toast.success('service added successfully')
                 }
             })
             .catch(error => {

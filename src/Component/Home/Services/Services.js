@@ -8,7 +8,7 @@ const Services = () => {
     const [serviceInfo, setServiceInfo] = useState([])
     const { user } = useContext(UserContext)
     const [loggedInUser, setLoggedInUser] = user;
-    const [states, setState] = useState(false);
+    const [states, setState] = useState();
     const parseJwt = (token) => {
         try {
             return (JSON.parse(atob(token.split('.')[1])))
@@ -21,9 +21,10 @@ const Services = () => {
     const email = (loggedInUser.email || loggedUser.email);
 
     useEffect(() => {
-        fetch('http://localhost:5000/showAllUserOrder?email=' + email)
+        fetch('https://infinite-headland-81835.herokuapp.com/isAdmin?email=' + email)
             .then(res => res.json())
             .then(result => {
+                console.log(result);
                 if (result.length == 0) {
                     setState(false)
                 }
@@ -31,10 +32,10 @@ const Services = () => {
                     setState(true)
                 }
             })
-    }, [email])
-
+    }, [])
+    console.log(states);
     useEffect(() => {
-        fetch('http://localhost:5000/showService')
+        fetch('https://infinite-headland-81835.herokuapp.com/showService')
             .then(res => res.json())
             .then(result => setServiceInfo(result))
     }, [])
@@ -44,38 +45,37 @@ const Services = () => {
                 <h2 className=" py-5  my-5" >Provide awesome <span>services</span></h2>
                 <div className="row " >
                     {
-                        states || !states ?
-                            serviceInfo.length ?
-                                serviceInfo.map(info =>
-                                    <div className="col-sm-12 col-md-6 col-lg-4 mt-4">
-                                        {
-                                            states && <Link to={`/adminServiceList`} >
-                                                <div className="card card-service-custom" >
-                                                    <div className="card-body ">
-                                                        <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
-                                                        <h4>{info.service}</h4>
-                                                        <p>{info.description}</p>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        }
-                                        {
-                                            !states && <Link to={`/order/:${info._id}`} >
-                                                <div className="card card-service-custom" >
-                                                    <div className="card-body ">
-                                                        <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
-                                                        <h4>{info.service}</h4>
-                                                        <p>{info.description}</p>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        }
-                                    </div>
-                                )
 
-                                : <Spinner />
+                        serviceInfo.length ?
+                            serviceInfo.map(info =>
+                                <div className="col-sm-12 col-md-6 col-lg-4 mt-4">
 
-                            : <p>hello</p>
+                                    {
+                                        !states && <Link to={`/order/${info._id}`} >
+                                            <div className="card card-service-custom" >
+                                                <div className="card-body ">
+                                                    <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
+                                                    <h4>{info.service}</h4>
+                                                    <p>{info.description}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    }
+                                    {
+                                        states &&
+                                        <div className="card card-service-custom" >
+                                            <div className="card-body ">
+                                                <img src={`data:image/png;base64,${info.image.img}`} alt="service-img" />
+                                                <h4>{info.service}</h4>
+                                                <p>{info.description}</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            )
+
+                            : <Spinner />
+
                     }
                 </div>
             </div>

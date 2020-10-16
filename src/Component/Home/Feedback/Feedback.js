@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../Spinner/Spinner';
 import './Feedback.css'
 
 const Feedback = () => {
     const [feedback, setFeedback] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/getAllReviews')
+        fetch('https://infinite-headland-81835.herokuapp.com/getAllReviews')
             .then(res => res.json())
             .then(result => setFeedback(result))
     }, [])
@@ -13,7 +14,9 @@ const Feedback = () => {
             <div className="review-wrapper container">
                 <h2 className="text-center my-3 mb-5"> Clients <span >  Feedback</span></h2>
                 <div className="row" >
-                    {
+
+                    {feedback.length ?
+
                         feedback.map(info => <div key={info.name} className="col-sm-12 col-md-6 col-lg-4 mt-5">
                             <div className="card card-service-custom   p-4" >
                                 <div className="client-img d-flex " >
@@ -27,6 +30,8 @@ const Feedback = () => {
                                 </div>
                             </div>
                         </div>)
+                        : <Spinner />
+
                     }
 
                 </div>

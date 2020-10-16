@@ -6,7 +6,7 @@ import './DashboardServiceList.css'
 const DashboardServiceList = () => {
     const [info, setInfo] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/showAllOrder')
+        fetch('https://infinite-headland-81835.herokuapp.com/showAllOrder')
             .then(res => res.json())
             .then(result => setInfo(result))
     }, [])

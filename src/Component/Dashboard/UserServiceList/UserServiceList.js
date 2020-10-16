@@ -26,7 +26,7 @@ const UserServiceList = () => {
     const email = (loggedInUser.email || loggedUser.email);
 
     useEffect(() => {
-        fetch('http://localhost:5000/showAllUserOrder?email=' + email)
+        fetch('https://infinite-headland-81835.herokuapp.com/showAllUserOrder?email=' + email)
             .then(res => res.json())
             .then(result => setService(result))
     }, [email])

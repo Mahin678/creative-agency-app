@@ -4,6 +4,9 @@ import _ from "lodash/fp";
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+toast.configure();
 
 const Review = () => {
     const { register, handleSubmit, watch, errors } = useForm();
@@ -23,13 +26,17 @@ const Review = () => {
         const newReviewer = { ...data };
         newReviewer.email = (loggedInUser.email || loggedUser.email);
         newReviewer.photo = (loggedInUser.photo || loggedUser.picture);
-        fetch('http://localhost:5000/addReview', {
+        fetch('https://infinite-headland-81835.herokuapp.com/addReview', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newReviewer)
         })
             .then(res => res.json())
-            .then(result => console.log(result))
+            .then(result => {
+                if (result) {
+                    toast.success('Successfully Review added')
+                }
+            })
     };
 
     return (

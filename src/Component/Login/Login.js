@@ -38,7 +38,7 @@ const Login = () => {
             newUser.name = user.displayName;
             newUser.email = user.email;
             newUser.photo = user.photoURL;
-            fetch('http://localhost:5000/isAdmin?email=' + newUser.email)
+            fetch('https://infinite-headland-81835.herokuapp.com/isAdmin?email=' + newUser.email)
                 .then(res => res.json())
                 .then(result => {
                     if (result.length == 0) {
