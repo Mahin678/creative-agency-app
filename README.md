@@ -1,12 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Creative Agency a Service Management web application
+# Creative Agency a Service Management Web Application
 
 
 ## Features
 
 Creative Agency is Fully Responsive web app.This site have admin and user panel.Firebase detect who is admin or user. 
-### user can :
+### User can :
   -  purchase a specific service order 
   -  give feedback about the service .   
   -  see ,his purchased order.
