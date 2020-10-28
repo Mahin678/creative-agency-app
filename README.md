@@ -1,35 +1,36 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Creative Agency an IT support web app
+# Creative Agency a Service Management web application
 
 
 ## Features
-Site is responsive, it has firebase authentication and a collection of e-mails in MongoDB from where it will differentiate whether the logged in user is a guest or an admin.
 
-### Client 
-- An user can order service, set a price and can upload an image as a sample.
-- User can post reviews.
-- User will be able to see their work progress through the status.
-
-### Admin
-- An admin can add services and make more admins.
-- Admin will be able to change the status of orders.
-
+Creative Agency is Fully Responsive web app.This site have admin and user panel.Firebase detect who is admin or user. 
+### user can :
+  -  purchase a specific service order 
+  -  give feedback about the service .   
+  -  see ,his purchased order.
+### And Admin can :
+  - Make more admin using by email for admin role.
+  - Add more service with upload an images
+  - Admin dashboard where ,admin can view all user.
 
 ### Technology Used 
 - React.js
 - react-hook-form
+- react npm tostify package
+- react npm Spinner package.
 - react-elastic-carousal
 - react-router-dom
 - Firebase auth
 - Firebase hosting
 - custom css
-- Bootstrap
+- Bootstrap 4
+- Heroku deploy
 - Node.js
 - Express.js
 - MongoDB
 - Base64
-- Heroku deploy
 
-### [LIVE SITE](https://creative-agency-212d8.web.app/home)
-### [Backend Repository](https://github.com/Rayhan0Islam0Shagor/creative-agency-server)
+### [LIVE SITE](https://creative-agency-app-e11f4.web.app/home)
+### [Server Repository](https://github.com/Rayhan0Islam0Shagor/creative-agency-server)
