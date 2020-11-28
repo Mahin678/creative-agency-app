@@ -48,16 +48,16 @@ const Topbar = () => {
 						</a>
 					</li>
 					<li className="nav-item">
-						<NavLink
+						<a
 							activeStyle={{
 								fontWeight: 'bold',
 								color: 'red',
 							}}
 							className="nav-link a mr-3"
-							to="/home"
+							href="#hire"
 						>
-							Our Team
-						</NavLink>
+							Service
+						</a>
 					</li>
 					<li className="nav-item">
 						<a
