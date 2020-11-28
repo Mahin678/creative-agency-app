@@ -29,6 +29,7 @@ const DashboardServiceList = () => {
 				console.log(data);
 			});
 	};
+
 	return (
 		<div>
 			<DashboardMain title={' Service List'}>
