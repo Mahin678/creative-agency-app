@@ -11,41 +11,45 @@ import UserServiceData from '../UserServiceData/UserServiceData';
 
 // ]
 const UserServiceList = () => {
-    const { user } = useContext(UserContext)
-    const [loggedInUser, setLoggedInUser] = user;
-    const [service, setService] = useState([])
-    const parseJwt = (token) => {
-        try {
-            return (JSON.parse(atob(token.split('.')[1])))
-        } catch (e) {
-            return (false);
-        }
-    };
-    const data = sessionStorage.getItem('token')
-    const loggedUser = parseJwt(data)
-    const email = (loggedInUser.email || loggedUser.email);
+	const { user } = useContext(UserContext);
+	const [loggedInUser, setLoggedInUser] = user;
+	const [service, setService] = useState([]);
+	const parseJwt = (token) => {
+		try {
+			return JSON.parse(atob(token.split('.')[1]));
+		} catch (e) {
+			return false;
+		}
+	};
+	const data = sessionStorage.getItem('token');
+	const loggedUser = parseJwt(data);
+	const email = loggedInUser.email || loggedUser.email;
 
-    useEffect(() => {
-        fetch('https://infinite-headland-81835.herokuapp.com/showAllUserOrder?email=' + email)
-            .then(res => res.json())
-            .then(result => setService(result))
-    }, [email])
-    return (
-        <DashboardMain title={"user service list"} >
-            <div className="dashboard-body p-4"  >
-                <div className="review  " >
-                    <div className="review-wrapper container">
-                        <div className="row mx-auto " >
-                            {
-                                service.length ? (service.map(info => <UserServiceData info={info} />)) :
-                                    <h1 className="text-danger" >NO Course Found </h1>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </DashboardMain>
-    );
+	useEffect(() => {
+		fetch(
+			'https://infinite-headland-81835.herokuapp.com/showAllUserOrder?email=' +
+				email
+		)
+			.then((res) => res.json())
+			.then((result) => setService(result));
+	}, [email]);
+	return (
+		<DashboardMain title={'user service list'}>
+			<div className="dashboard-body p-4">
+				<div className="review  ">
+					<div className="review-wrapper container">
+						<div className="row mx-auto ">
+							{service.length ? (
+								service.map((info) => <UserServiceData info={info} />)
+							) : (
+								<h1 className="text-danger">NO Course Found </h1>
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
+		</DashboardMain>
+	);
 };
 
 export default UserServiceList;
